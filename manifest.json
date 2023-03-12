@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "Active Tab Title",
+    "version": "1.3",
+    "description": "Displays the title of the active tab in a popup.",
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "activeTab",
+        "tabs"
+    ]
+}
