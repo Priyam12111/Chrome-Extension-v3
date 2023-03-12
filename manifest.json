@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Active Tab Title",
-    "version": "1.38",
+    "version": "1.409",
     "description": "Displays the title of the active tab in a popup.",
     "action": {
         "default_popup": "popup.html"
