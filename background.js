@@ -1,4 +1,16 @@
-chrome.action.onClicked.addListener(function (tabId, changeInfo, tab) {
-  if (changeInfo.status === 'complete' && tab.url.includes('youtube.com/watch')) {
-    chrome.tabs.executeScript(tab.id, { file: "content.js" });
-}});
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  if (message.type === 'fetch_data') {
+    const url = message.url;
+
+    fetch(url)
+      .then(response => response.text())
+      .then(data => {
+        sendResponse({ type: 'data_received', data });
+      })
+      .catch(error => {
+        sendResponse({ type: 'error', error });
+      });
+
+    return true;
+  }
+});

@@ -1,10 +1,13 @@
-var title =document.querySelector('title').innerText
-document.querySelector('title').innerText=`${title} by Priyam`
-console.log('CONTENT SCRIPT IS WORKING')
+chrome.runtime.sendMessage({ type: 'fetch_data', url: 'https://www.youtube.com/watch*' }, function(response) {
+  if (response.type === 'data_received') {
+    const data = response.data;
 
-const videoTitleElement = document.querySelectorAll(' div#title')[-1];
-console.log(videoTitleElement)
+    // Modify the page's body content with the fetched data
+    const body = document.body;
+    body.innerHTML = '<h1>Fetched Data</h1>' + data + body.innerHTML;
+  } else if (response.type === 'error') {
+    const error = response.error;
 
-if (videoTitleElement) {
-  videoTitleElement.textContent = "New Video Title";
-}
+    // Handle the error appropriately
+  }
+});
